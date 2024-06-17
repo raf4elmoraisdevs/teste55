@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Códigos SKU</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #generate-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #sku-list {
+            margin-top: 20px;
+            list-style-type: none;
+            padding: 0;
+        }
+        #sku-list li {
+            margin: 5px 0;
+            padding: 5px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Gerador de Códigos SKU</h1>
+    <button id="generate-btn">Gerar Códigos</button>
+    <ul id="sku-list"></ul>
+
+    <script>
+        function generateRandomSKU() {
+            const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            const numbers = "0123456789";
+
+            let sku = "";
+            // Gerar os dois primeiros caracteres (letras)
+            for (let i = 0; i < 2; i++) {
+                sku += letters.charAt(Math.floor(Math.random() * letters.length));
+            }
+            // Gerar os três últimos caracteres (números)
+            for (let i = 0; i < 3; i++) {
+                sku += numbers.charAt(Math.floor(Math.random() * numbers.length));
+            }
+
+            return sku;
+        }
+
+        function generateSKUs() {
+            const skuList = document.getElementById("sku-list");
+            skuList.innerHTML = ""; // Limpar a lista antes de gerar novos códigos
+
+            for (let i = 0; i < 10; i++) {
+                const sku = generateRandomSKU();
+                const listItem = document.createElement("li");
+                listItem.textContent = sku;
+                skuList.appendChild(listItem);
+            }
+        }
+
+        document.getElementById("generate-btn").addEventListener("click", generateSKUs);
+    </script>
+
+</body>
+</html>
